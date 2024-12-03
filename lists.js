@@ -124,6 +124,16 @@ async function blPop() {
   console.log(res);
 }
 
+async function listExpiration() {
+  const res = await client.expire("mssgs", 10);
+  console.log(res);
+}
+
+async function ttl() {
+  const res = await client.ttl("mssgs");
+  console.log(res);
+}
+
 // leftPush();
 // rightPush();
 // leftPop();
@@ -144,3 +154,5 @@ async function blPop() {
 // lpushx();
 // lrem();
 lset();
+// listExpiration();
+// ttl();
