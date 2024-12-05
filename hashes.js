@@ -132,7 +132,7 @@ async function hvals() {
 // getAll();
 // getAllKeys();
 // hlen();
-// hscan();
+hscan();
 // hsetnx();
 // hstrlen();
-hvals();
+// hvals();

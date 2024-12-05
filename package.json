@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "ioredis": "^5.4.1",
+    "q": "^1.5.1",
     "redis": "^4.7.0"
   }
 }
