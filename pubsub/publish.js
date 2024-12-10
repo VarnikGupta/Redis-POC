@@ -2,7 +2,7 @@ const { connectRedis } = require("../client");
 
 connectRedis().then((client) => {
   // publish(client);
-  doChanges(client);
+  doChanges(client,"tech:1","redis");
 });
 
 async function publish(client) {
@@ -10,12 +10,17 @@ async function publish(client) {
   console.log(resp);
 }
 
-async function doChanges(client) {
-  const res = await client.zAdd("tokens:suzes", [
-    { score: 100, value: "a" },
-    { score: 20, value: "b" },
-    { score: 40, value: "c" },
-    { score: 80, value: "pl" },
-  ]);
-  console.log(res);
+async function doChanges(client,key,value) {
+  // const res = await client.zAdd("tokens:suzes", [
+  //   { score: 100, value: "a" },
+  //   { score: 20, value: "b" },
+  //   { score: 40, value: "c" },
+  //   { score: 80, value: "pl" },
+  // ]);
+  await client.set(key, value);
+  await client.set(key+":copy", "");
+  // if (res) {
+    await client.expire(key+":copy", 10);
+  // }
+  // console.log(res);
 }

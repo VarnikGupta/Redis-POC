@@ -23,9 +23,14 @@ async function keySpace(client) {
 
 async function keyEvent(client) {
   await client.pSubscribe(
-    "__keyevent@0__:*",
+    "__keyevent@0__:expired",
     async (message, channel) => {
-      console.log(`event >>> ${message} on ${channel}`);
+      console.log(`event >>> ${channel} on ${message}`);
+      connectRedis().then(async (clientt) => {
+        const data = await clientt.get(message);
+        console.log("the data of the expired key is:", data);
+        await clientt.del(message);
+      });
     }
   );
 }
